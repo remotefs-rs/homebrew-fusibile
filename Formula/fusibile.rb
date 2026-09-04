@@ -5,8 +5,6 @@ class Fusibile < Formula
   version "0.2.0"
 
   on_macos do
-    depends_on cask: "macfuse"
-
     # The Apple Silicon build vendors Samba, which links gnutls/libunistring
     # dynamically. The Intel build has no SMB support at all, see caveats below.
     on_arm do
@@ -39,8 +37,10 @@ class Fusibile < Formula
   def caveats
     on_macos do
       <<~CAVEATS
-        fusibile needs macFUSE. macOS will ask you to allow the system extension
-        in System Settings -> Privacy & Security the first time you mount anything.
+        fusibile needs macFUSE, which Homebrew cannot install as a formula
+        dependency. Install it first with "brew install --cask macfuse".
+        macOS will ask you to allow the system extension in System Settings ->
+        Privacy & Security the first time you mount anything.
       CAVEATS
       on_intel do
         <<~CAVEATS
